@@ -6,20 +6,6 @@ node_js:
   - '8'
 cache: npm
 
-jobs:
-  include: 
-      - stage: test
-        script: echo 'okde2'
-      - stage: builddoc
-        if: (branch = master) AND (commit_message =~ (docs))
-        script: bash doc/release.sh
-      - stage: deploy
-        provider: pages
-        skip_cleanup: true
-        github_token: $GITHUB_TOKEN
-        keep_history: true
-        local_dir: ./doc/noahv
-
 notifications:
   email:
     on_success: never
