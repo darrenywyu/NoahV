@@ -9,7 +9,7 @@ cache: npm
 jobs:
   include: 
       - stage: test
-        script: echo 'ok'
+        script: echo 'okde'
       - stage: builddoc
         if: (branch = master) AND (commit_message =~ /(docs)/)
         script: bash doc/release.sh
