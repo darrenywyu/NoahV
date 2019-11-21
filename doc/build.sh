@@ -28,7 +28,7 @@ npm install
 # build
 echo "npm build start"
 
-node scripts/build.js
+node ./scripts/build.js
 
 
 if [ $? -ne 0 ]; then
