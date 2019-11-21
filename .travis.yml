@@ -5,15 +5,13 @@ os:
 node_js:
   - '8'
 cache: npm
-
-script:
-  - bash travis.sh
-
 jobs:
   include: 
-      if: (branch = gh-pages) AND (commit_message ~ /(docs)/)
-      - stage: build
-        script: sh doc/release.sh
+      - stage: test
+        script: bash travis.sh
+      - stage: buildDoc
+        if: (branch = gh-pages) AND (commit_message ~ /(docs)/)
+        script: bash doc/release.sh
       - stage: deploy
         provider: pages
         skip_cleanup: true
