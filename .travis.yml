@@ -6,6 +6,23 @@ node_js:
   - '8'
 cache: npm
 
+jobs:
+  include: 
+      - stage: test
+        if: (commit_message !~ /(docs|chore)/)
+        script: bash travis.sh
+      - stage: builddoc
+        if: (branch = master) AND (commit_message =~ /(docs)/)
+        script: bash doc/release.sh
+      - stage: deploy
+        if: (branch = master) AND (commit_message =~ /(docs)/)
+        deploy:
+          provider: pages
+          skip_cleanup: true
+          github_token: $GITHUB_TOKEN
+          keep_history: true
+          local_dir: ./doc/noahv
+script: echo 'ok'
 notifications:
   email:
     on_success: never
